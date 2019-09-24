@@ -2,16 +2,19 @@ package br.com.help.services;
 
 import java.util.List;
 
+import javassist.tools.rmi.ObjectNotFoundException;
+
 public interface IService<T> {
 
-	T inserir(T entity);
+	T inserir(T entity) throws ObjectNotFoundException ;
 
 	T atualizar(T entity);
 
-	T buscarPorId(int id) throws IllegalAccessException;
+	T buscarPorId(Long id) throws IllegalAccessException;
 
-	void deletarPorId(int id);
+	void deletarPorId(Long id);
 
 	List<T> buscarTodos();
+
 
 }

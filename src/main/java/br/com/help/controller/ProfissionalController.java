@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.help.beans.Profissional;
 import br.com.help.services.ProfissionalService;
+import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping("/profissional")
@@ -28,7 +28,7 @@ public class ProfissionalController {
 	ProfissionalService profService;
 
 	@GetMapping(path  = "/{id}")
-	public ResponseEntity<Profissional> find(@PathVariable Integer id)  {
+	public ResponseEntity<Profissional> find(@PathVariable Long id)  {
 		Profissional objProfissional = null;
 		try {
 			objProfissional = profService.buscarPorId(id);
@@ -40,7 +40,7 @@ public class ProfissionalController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Profissional obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Profissional obj) throws ObjectNotFoundException {
 		obj = profService.inserir(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("(id)").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

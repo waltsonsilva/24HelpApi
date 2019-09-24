@@ -9,21 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import br.com.help.enums.Servicos;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "profissional")
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder(toBuilder = true)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonDeserialize(as = Profissional.class)
 public class Profissional implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,11 +32,12 @@ public class Profissional implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, unique = true, updatable = false)
 
-	private int id;
+	private Long id;
 
 	private String cpf;
 
 	private String nome;
 
 	private Servicos servico;
+	
 }

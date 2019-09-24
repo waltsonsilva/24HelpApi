@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.help.beans.Profissional;
 
-public interface ProfissionalRepository extends JpaRepository<Profissional, Integer> {
+public interface ProfissionalRepository extends JpaRepository<Profissional, Long> {
+	
 
 }

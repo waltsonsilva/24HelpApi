@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.help.beans.Profissional;
 import br.com.help.repository.ProfissionalRepository;
+import javassist.tools.rmi.ObjectNotFoundException;
 
 @Service
 public class ProfissionalServiceImpl implements ProfissionalService {
@@ -34,7 +35,7 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 	}
 
 	@Override
-	public Profissional buscarPorId(int id) throws IllegalAccessException {
+	public Profissional buscarPorId(Long id) throws IllegalAccessException {
 		if (id <= 0) {
 			throw new IllegalArgumentException("o id não pode ser nulo ou <= 0");
 		}
@@ -43,7 +44,7 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 	}
 
 	@Override
-	public void deletarPorId(int id) {
+	public void deletarPorId(Long id) {
 		// TODO Auto-generated method stub
 
 	}
@@ -55,6 +56,12 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 			return profissionais;
 		}
 		return null;
+	}
+
+	public Profissional find(Long id) throws ObjectNotFoundException {
+		Optional<Profissional> prof = profissionalRepo.findById(id);
+		return prof.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado ID: " + id + ", Tipo" + Profissional.class.getName()));
 	}
 
 }

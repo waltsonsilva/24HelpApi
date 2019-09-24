@@ -19,7 +19,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	
 		ProfissionalBuilder pro = Profissional.builder().cpf("111.111.111-12")
-				.id(1)
+				.id((long) 1)
 				.nome("Teste Builder")
 				.servico(Servicos.JARDINAGEM);
 		
