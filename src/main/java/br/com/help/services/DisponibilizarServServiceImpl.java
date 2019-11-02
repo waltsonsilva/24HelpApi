@@ -19,17 +19,17 @@ public class DisponibilizarServServiceImpl implements DisponibilizarServService 
 
 	@Autowired
 	private ProfissionalService profService;
-	
+
 	@Override
 	public DisponibilizarServico inserir(DisponibilizarServico entity) throws ObjectNotFoundException {
 		if (entity == null) {
 			throw new IllegalArgumentException("Não pode ser nulo");
 		}
-		 entity.setFlagOnline(1);
-		
-		 try {
-		  Profissional prof = profService.buscarPorId(entity.getProfissional().getId());
-			 entity.setProfissional(prof);
+		entity.setFlagOnline(1);
+
+		try {
+			Profissional prof = profService.buscarPorId(entity.getProfissional().getId());
+			entity.setProfissional(prof);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +56,6 @@ public class DisponibilizarServServiceImpl implements DisponibilizarServService 
 
 	@Override
 	public void deletarPorId(Long id) {
-		// TODO Auto-generated method stub
 
 	}
 

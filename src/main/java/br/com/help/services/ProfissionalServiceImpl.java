@@ -24,7 +24,7 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 
 			return profissionalRepo.save(profissional);
 
-	}
+	}	
 
 	@Override
 	public Profissional atualizar(Profissional profissional) {

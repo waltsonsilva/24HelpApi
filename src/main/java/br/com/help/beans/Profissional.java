@@ -1,29 +1,26 @@
 package br.com.help.beans;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "profissional")
-@Builder(toBuilder = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonDeserialize(as = Profissional.class)
-public class Profissional implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class Profissional extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private double ranking;
-	private List<Servico> servicos; 
+
+	private Servico servicos;
 }
