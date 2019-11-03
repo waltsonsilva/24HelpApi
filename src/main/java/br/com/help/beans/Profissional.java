@@ -22,5 +22,5 @@ public class Profissional extends Usuario implements Serializable {
 
 	private double ranking;
 
-	private Servico servicos;
+	
 }

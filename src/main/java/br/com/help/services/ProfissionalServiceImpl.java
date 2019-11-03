@@ -17,9 +17,9 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 	ProfissionalRepository profissionalRepo;
 
 	@Override
-	public Profissional inserir(Profissional profissional) {
+	public Profissional inserir(Profissional profissional)throws ObjectNotFoundException {
 		if (profissional == null) {
-			throw new IllegalArgumentException("O Profissional não pode ser nulo");
+			throw new ObjectNotFoundException("O Profissional não pode ser nulo");
 		} else
 
 			return profissionalRepo.save(profissional);

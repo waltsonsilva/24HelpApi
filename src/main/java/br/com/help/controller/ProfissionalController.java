@@ -25,7 +25,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class ProfissionalController {
 
 	@Autowired
-	ProfissionalService profService;
+	private ProfissionalService profService;
 
 	@GetMapping(path  = "/{id}")
 	public ResponseEntity<Profissional> find(@PathVariable Long id)  {
@@ -40,8 +40,13 @@ public class ProfissionalController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Profissional obj) throws ObjectNotFoundException {
-		obj = profService.inserir(obj);
+	public ResponseEntity<Profissional> insert(@Valid @RequestBody Profissional obj){
+		try {
+			obj = profService.inserir(obj);
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("(id)").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 
