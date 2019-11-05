@@ -56,20 +56,13 @@ public class SolicitanteController {
 		return ResponseEntity.created(uri).build();
 
 	}
-	@PutMapping
+	@PutMapping(path = "/{id}")
 	public ResponseEntity<Solicitante>atualizar(@RequestBody Solicitante obj, @PathVariable Long id){
 	
-			try {
-				if(id != null && id <= 0) {
-				Solicitante solicitante = solicitanteService.buscarPorId(id);
-					if(solicitante != null) {
-						solicitante = solicitanteService.atualizar(obj);
-				}
-				}
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if(obj != null) {
+			obj.setId(id);
+			solicitanteService.atualizar(obj);
+		}
 			
 			return ResponseEntity.ok().build();
 		}

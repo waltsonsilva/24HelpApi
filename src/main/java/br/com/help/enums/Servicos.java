@@ -2,7 +2,7 @@ package br.com.help.enums;
 
 public enum Servicos {
 
-	ELETRICO(1, "Eletrico"), MARCENARIA(2, "Macenaria"), JARDINAGEM(3, "Jardinagem");
+	ELETRICO(0, "Eletrico"), MARCENARIA(1, "Macenaria"), JARDINAGEM(2, "Jardinagem");
 
 	private int codigo;
 	private String descricao;

@@ -27,20 +27,20 @@ public class ProfissionalController {
 	@Autowired
 	private ProfissionalService profService;
 
-	@GetMapping(path  = "/{id}")
-	public ResponseEntity<Profissional> find(@PathVariable Long id)  {
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Profissional> find(@PathVariable Long id) {
 		Profissional objProfissional = null;
 		try {
 			objProfissional = profService.buscarPorId(id);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-			return ResponseEntity.ok(objProfissional);
-		
+		return ResponseEntity.ok(objProfissional);
+
 	}
 
 	@PostMapping
-	public ResponseEntity<Profissional> insert(@Valid @RequestBody Profissional obj){
+	public ResponseEntity<Profissional> insert(@Valid @RequestBody Profissional obj) {
 		try {
 			obj = profService.inserir(obj);
 		} catch (ObjectNotFoundException e) {
@@ -56,12 +56,14 @@ public class ProfissionalController {
 	public List todos() {
 		return profService.buscarTodos();
 	}
-	
+
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Profissional> atualizar(@RequestBody Profissional prof){
+	public ResponseEntity<Profissional> atualizar(@RequestBody Profissional prof, @PathVariable Long id) {
 		if(prof != null) {
-			profService.atualizar(prof);
+			prof.setId(id);
+			profService.atualizar(prof);	
 		}
+
 		return ResponseEntity.ok().build();
 	}
 }

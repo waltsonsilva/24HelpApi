@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import br.com.help.enums.Servicos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,5 +23,5 @@ public class Profissional extends Usuario implements Serializable {
 
 	private double ranking;
 
-	
+	private Servicos servico;
 }
