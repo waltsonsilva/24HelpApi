@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.help.beans.DisponibilizarServico;
+import br.com.help.beans.Localizacao;
 import br.com.help.beans.Profissional;
 import br.com.help.repository.DisponibilizarServRepository;
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -30,6 +31,10 @@ public class DisponibilizarServServiceImpl implements DisponibilizarServService 
 		try {
 			Profissional prof = profService.buscarPorId(entity.getProfissional().getId());
 			entity.setProfissional(prof);
+			Localizacao localizaocao = entity.getLocalizacao();
+			if(localizaocao != null) {
+				entity.setLocalizacao(localizaocao);
+			}
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

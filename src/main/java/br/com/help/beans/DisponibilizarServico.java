@@ -2,6 +2,7 @@ package br.com.help.beans;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,16 +31,14 @@ public class DisponibilizarServico implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String longitude;
-	private String latitude;
 	private int flagOnline;
-	
-	
 
 	@OneToOne
-	@JoinColumn(name="profissoinal_id")
+	@JoinColumn(name = "profissoinal_id")
 	private Profissional profissional;
 
-
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+	@JoinColumn(name="localizacao_id" )
+	private Localizacao localizacao;
 
 }
