@@ -31,5 +31,6 @@ public class SolicitacaoServico implements Serializable {
 	private Long id;
 	private Solicitante solicitante;
 	private Date dataSolicitação;
+	private Localizacao localizacao;
 
 }
