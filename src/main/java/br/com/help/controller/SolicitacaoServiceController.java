@@ -16,50 +16,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.help.beans.DisponibilizarServico;
-import br.com.help.services.DisponibilizarServService;
+import br.com.help.beans.SolicitacaoServico;
+import br.com.help.services.SolicitacaoIService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
-@RequestMapping("/dspServico")
-public class DisponibilizarServController {
+@RequestMapping("/solicitacao")
+public class SolicitacaoServiceController {
 
 	@Autowired
-	private DisponibilizarServService dspServicoService;
+	private SolicitacaoIService sServico;
+	
+
+	@GetMapping
+	public List todos() {
+		return sServico.buscarTodos();
+	}
 
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<DisponibilizarServico> find(@PathVariable Long id) {
-		DisponibilizarServico dspServico = null;
+	public ResponseEntity<SolicitacaoServico> porId(@PathVariable Long id) {
+		SolicitacaoServico servico = null;
 		try {
-			dspServico = dspServicoService.buscarPorId(id);
+			servico = sServico.buscarPorId(id);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ResponseEntity.ok(dspServico);
+		return ResponseEntity.ok(servico);
 	}
 
 	@PostMapping
-	public ResponseEntity<DisponibilizarServico> insert(@Valid @RequestBody DisponibilizarServico dspServico)
-			throws ObjectNotFoundException {
-		dspServico = dspServicoService.inserir(dspServico);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("(id").buildAndExpand(dspServico.getId())
-				.toUri();
+	public ResponseEntity<SolicitacaoServico> inserir(@Valid @RequestBody SolicitacaoServico body) throws ObjectNotFoundException {
+		body = sServico.inserir(body);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("id").buildAndExpand(body.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<DisponibilizarServico> atualizar(@RequestBody DisponibilizarServico dspServico,
+	public ResponseEntity<SolicitacaoServico> atualizar(@RequestBody SolicitacaoServico servico,
 			@PathVariable Long id) {
-		if (dspServico != null) {
-			dspServico.setId(id);
-			dspServicoService.atualizar(dspServico);
+		if (servico != null) {
+			servico.setId(id);
+			sServico.atualizar(servico);
 		}
 		return ResponseEntity.ok().build();
-	}
-
-	@GetMapping
-	public List todos() {
-		return dspServicoService.buscarTodos();
 	}
 }
