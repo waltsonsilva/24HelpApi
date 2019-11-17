@@ -48,6 +48,8 @@ public class SolicitacaoServiceImpl implements SolicitacaoIService {
 		if (entity.getId() <= 0) {
 			throw new IllegalArgumentException("O id não pode ser meno ou igual a zero!");
 		}
+		Date date = new Date();
+		entity.setDataSolicitação(date);
 		return solicitacaoRepo.save(entity);
 	}
 
